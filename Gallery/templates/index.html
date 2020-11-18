@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+div.gallery {
+  border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+  height:100px;
+  width:200px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<center><h2><a href="{% url 'addImages' %}">Add new image</a></h2></center>
+<div class="btn-group btn-group-justified">
+    <a  href="{% url 'show_filter' 'All' %}" class="btn btn-primary">All</a>
+    <a  href="{% url 'show_filter' 'Nature' %}" class="btn btn-primary">Nature</a>
+    <a  href="{% url 'show_filter' 'Science' %}" class="btn btn-primary">Science</a>
+    <a  href="{% url 'show_filter' 'Animal' %}" class="btn btn-primary">Animal</a>
+    <a  href="{% url 'show_filter' 'Cars' %}" class="btn btn-primary">Car</a>
+    <a  href="{% url 'show_filter' 'History' %}" class="btn btn-primary">History</a>
+  </div>
+{% if status == 'Nature' %}
+{% for image in images %}
+<div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="550" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+{% endfor %}
+
+
+    {% elif status == 'Cars' %}
+    {% if image %}
+      {% for image in images %}
+  <div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="650" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+      {% endfor %}
+    {% else %}
+    <h1><a href="{% url 'addImages' %}">No Image Found</a></h1>
+    {% endif %}
+
+    {% elif status == 'Science' %}
+{% for image in images %}
+<div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="550" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+{% endfor %}
+
+
+     {% elif status == 'Animal' %}
+    {% if image %}
+      {% for image in images %}
+  <div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="650" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+      {% endfor %}
+    {% else %}
+    <h1><a href="{% url 'addImages' %}">No Image Found</a></h1>
+    {% endif %}
+
+     {% elif status == 'History' %}
+    {% if image %}
+      {% for image in images %}
+  <div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="650" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+      {% endfor %}
+    {% else %}
+    <h1><a href="{% url 'addImages' %}">No Image Found</a></h1>
+    {% endif %}
+{% else %}
+    {% for image in images %}
+<div class="responsive" style="padding:10px;">
+  <div class="gallery">
+    <a href="{% url 'openImage' image.id %}">
+      <img src="{{image.image.url}}" alt="image" width="550" height="300">
+    </a>
+    <div class="desc">{{image.description}} - {{image.tags}}</div>
+  </div>
+</div>
+{% endfor %}
+
+    {% endif %}
+<div class="clearfix"></div>
+
+<!--<div style="padding:6px;">
+  <p>This example use media queries to re-arrange the images on different screen sizes: for screens larger than 700px wide, it will show four images side by side, for screens smaller than 700px, it will show two images side by side. For screens smaller than 500px, the images will stack vertically (100%).</p>
+  <p>You will learn more about media queries and responsive web design later in our CSS Tutorial.</p>
+</div>-->
+</div>
+</body>
+</html>
